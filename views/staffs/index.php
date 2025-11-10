@@ -41,7 +41,7 @@ $staffList = $controller->getStaffList();
                     <td><?php echo $staff['phone'] ?></td>
                     <td><?php echo $staff['location'] ?></td>
                     <td>
-                        <a href="edi    t.php?id=<?php echo $staff['id'] ?>" class="btn btn-primary">Edit</a>
+                        <a href="edit.php?id=<?php echo $staff['id'] ?>" class="btn btn-primary">Edit</a>
                         <a href="delete.php?id=<?php echo $staff['id'] ?>" class="btn btn-danger">Delete</a>
                     </td>
 

@@ -31,7 +31,7 @@ class staffController
                 $result = $this->staffModel->addStaff($name, $email, $phone, $location);
                 if ($result) {
                     echo 'Added Staff Successfully';
-                    header('location:list.php');
+                    header('location:index.php');
                 } else {
                     return "Failed to Add Staff";
                 }
@@ -53,7 +53,7 @@ class staffController
             $result = $this->staffModel->updateStaff($name, $email, $phone, $location, $id);
             if ($result) {
                 echo 'Updated Staff Successfully';
-                header('location:list.php');
+                header('location:index.php');
             } else {
                 return "Failed to Update Staff";
             }
@@ -66,7 +66,7 @@ class staffController
             $result = $this->staffModel->deleteStaff($id);
             if ($result) {
                 echo 'Deleted Staff Successfully';
-                header('location:list.php');
+                header('location:index.php');
             }else{
                 return "Failed to Delete Staff";
             }
