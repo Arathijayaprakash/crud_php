@@ -1,16 +1,13 @@
 <?php
-include '../config/db_config.php';
+include '../../config/db_config.php';
+include '../../controllers/staffController.php';
+
+$controller = new staffController($conn);
+
 $id = $_GET['id'];
-$sql = "SELECT * FROM staff WHERE id='$id'";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$result = $stmt->get_result();
-while ($row = $result->fetch_assoc()) {
-    $id = $row['id'];
-    $name = $row['name'];
-    $email = $row['email'];
-    $phone = $row['phone'];
-    $location = $row['location'];
+$staff = $controller->getStaffById($id);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $error = $controller->updateStaff($_POST);
 }
 ?>
 
@@ -25,14 +22,14 @@ while ($row = $result->fetch_assoc()) {
 </head>
 
 <body>
-    <form action="update.php" method="POST">
+    <form action="edit.php" method="POST">
         <div class="container w-50">
             <h2>Edit Staff Details</h2>
             <input type="hidden" value="<?php echo $id ?>" name="id">
-            <input class="form-control mb-3" type="text" value="<?php echo $name ?>" name="name" placeholder="Name">
-            <input class="form-control mb-3" type="text" value="<?php echo $email ?>" name="email" placeholder="Email">
-            <input class="form-control mb-3" type="text" value="<?php echo $phone ?>" name="phone" placeholder="Phone">
-            <input class="form-control mb-3" type="text" value="<?php echo $location ?>" name="location" placeholder="Location">
+            <input class="form-control mb-3" type="text" value="<?php echo $staff['name'] ?>" name="name" placeholder="Name">
+            <input class="form-control mb-3" type="text" value="<?php echo $staff['email'] ?>" name="email" placeholder="Email">
+            <input class="form-control mb-3" type="text" value="<?php echo $staff['phone'] ?>" name="phone" placeholder="Phone">
+            <input class="form-control mb-3" type="text" value="<?php echo $staff['location'] ?>" name="location" placeholder="Location">
             <button type="submit" name="edit" class="btn btn-success">Save Changes</button>
             <?php
             if (isset($error)) {

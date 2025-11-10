@@ -1,23 +1,11 @@
 <?php
-include '../config/db_config.php';
+include '../../config/db_config.php';
+include '../../controllers/staffController.php';
 
-if (isset($_POST['register'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $location = $_POST['location'];
+$controller = new staffController($conn);
 
-    if (!empty($name) && !empty($email) && !empty($phone) && !empty($location)) {
-        $sql = "INSERT INTO staff (name,email,phone,location) VALUES ('$name','$email','$phone','$location')";
-        if ($conn->query($sql) === TRUE) {
-            echo 'Added Staff Successfully';
-            header('location:list.php');
-        } else {
-            $error = "Failed to Add Staff";
-        }
-    } else {
-        $error = 'Please fill all fields';
-    }
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $error = $controller->addStaff($_POST);
 }
 ?>
 
