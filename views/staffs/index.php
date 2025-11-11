@@ -1,7 +1,13 @@
 <?php
+session_start();
 include '../../config/db_config.php';
 include '../../controllers/staffController.php';
+include '../../controllers/loginController.php';
 
+$loginController = new LoginController($conn);
+if (!$loginController->isLoggedIn()) {
+    header('Location: ../login.php');
+}
 $controller = new staffController($conn);
 $staffList = $controller->getStaffList();
 ?>
@@ -18,6 +24,9 @@ $staffList = $controller->getStaffList();
 
 <body>
     <div class="container">
+        <h2>Welcome, <?php echo $_SESSION['username']; ?>!</h2>
+        <a href="../logout.php" class="btn btn-danger">Logout</a>
+
         <a href="addform.php" class="btn btn-success m-3">Create Staff</a>
         <table class="table table-hover">
             <thead>
@@ -34,19 +43,19 @@ $staffList = $controller->getStaffList();
             <tbody>
                 <?php foreach ($staffList as $staff):
                 ?>
-                <tr>
-                    <td><?php echo $staff['id'] ?></td>
-                    <td><?php echo $staff['name'] ?></td>
-                    <td><?php echo $staff['email'] ?></td>
-                    <td><?php echo $staff['phone'] ?></td>
-                    <td><?php echo $staff['location'] ?></td>
-                    <td>
-                        <a href="edit.php?id=<?php echo $staff['id'] ?>" class="btn btn-primary">Edit</a>
-                        <a href="delete.php?id=<?php echo $staff['id'] ?>" class="btn btn-danger">Delete</a>
-                    </td>
+                    <tr>
+                        <td><?php echo $staff['id'] ?></td>
+                        <td><?php echo $staff['name'] ?></td>
+                        <td><?php echo $staff['email'] ?></td>
+                        <td><?php echo $staff['phone'] ?></td>
+                        <td><?php echo $staff['location'] ?></td>
+                        <td>
+                            <a href="edit.php?id=<?php echo $staff['id'] ?>" class="btn btn-primary">Edit</a>
+                            <a href="delete.php?id=<?php echo $staff['id'] ?>" class="btn btn-danger">Delete</a>
+                        </td>
 
-                </tr>
-                <?php endforeach;?>
+                    </tr>
+                <?php endforeach; ?>
 
             </tbody>
         </table>
