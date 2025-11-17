@@ -9,7 +9,7 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $loginController->login($_POST);
     if ($result === true) {
-        header('Location: staffs/index.php');
+        header('Location: dashboard.php');
         exit;
     } else {
         $error = $result;
