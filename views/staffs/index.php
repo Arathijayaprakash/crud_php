@@ -1,10 +1,26 @@
 <?php
 $pageTitle = 'Staff List';
 include '../layout.php';
-include '../../controllers/staffController.php';
 
-$controller = new staffController($conn);
-$staffList = $controller->getStaffList();
+$apiUrl = "http://localhost:8080/crud/api/staffs.php";
+$curl = curl_init($apiUrl);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_HTTPGET, true);
+
+$response = curl_exec($curl);
+if (curl_errno($curl)) {
+    echo 'cURL Error: ' . curl_error($curl);
+    exit;
+}
+
+curl_close($curl);
+
+$data = json_decode($response, true);
+
+if (!$data || !is_array($data)) {
+    echo "Failed to fetch data or invalid response.";
+    exit;
+}
 ?>
 
 <a href="addform.php" class="btn btn-success m-3">Create Staff</a>
@@ -20,7 +36,7 @@ $staffList = $controller->getStaffList();
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($staffList as $staff): ?>
+        <?php foreach ($data as $staff): ?>
             <tr>
                 <td><?php echo $staff['id'] ?></td>
                 <td><?php echo $staff['name'] ?></td>
