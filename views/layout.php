@@ -5,7 +5,7 @@ include __DIR__ . '/../controllers/loginController.php';
 
 $loginController = new LoginController($conn);
 if (!$loginController->isLoggedIn()) {
-    header('Location: ../login.php');
+    header('Location: /crud/views/login.php');
 }
 ?>
 
@@ -52,7 +52,7 @@ if (!$loginController->isLoggedIn()) {
             <!-- Sidebar -->
             <div class="col-md-3 col-lg-2 sidebar">
                 <h4>Welcome <?php echo $_SESSION['username'] ?></h4>
-                <a href="../dashboard.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'dashboard.php' ? 'active' : ''; ?>">Dashboard</a>
+                <a href="/crud/views/dashboard.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'dashboard.php' ? 'active' : ''; ?>">Dashboard</a>
                 <a href="staffs/index.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : ''; ?>">Staffs</a>
                 <a href="/crud/views/logout.php" class="btn btn-danger mt-3">Logout</a>
             </div>
