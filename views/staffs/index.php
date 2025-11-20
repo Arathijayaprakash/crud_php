@@ -52,5 +52,8 @@ if (!$data || !is_array($data)) {
     </tbody>
 </table>
 
+<div style="margin-top: 20px;">
+    <a href="../dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
+</div>
 <?php include '../footer.php';
 ?>

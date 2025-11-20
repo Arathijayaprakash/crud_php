@@ -31,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input class="form-control mb-3" type="text" value="<?php echo $staff['phone'] ?>" name="phone" placeholder="Phone">
             <input class="form-control mb-3" type="text" value="<?php echo $staff['location'] ?>" name="location" placeholder="Location">
             <button type="submit" name="edit" class="btn btn-success">Save Changes</button>
+            <a href="index.php" class="btn btn-secondary">Back to Staff List</a>
             <?php
             if (isset($error)) {
                 echo "<div class='alert alert-danger mt-3'>$error</div>";
             }
             ?>
         </div>
-
     </form>
 </body>
 

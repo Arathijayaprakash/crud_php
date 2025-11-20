@@ -4,7 +4,7 @@ include '../../controllers/staffController.php';
 
 $controller = new staffController($conn);
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error = $controller->addStaff($_POST);
 }
 ?>
@@ -33,6 +33,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 echo "<div class='alert alert-danger mt-3'>$error</div>";
             }
             ?>
+            <a href="index.php" class="btn btn-secondary">Back to Staff List</a>
+
         </div>
 
     </form>
